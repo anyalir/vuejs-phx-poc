@@ -14,6 +14,8 @@ defmodule VuejsIntegration.Application do
       {Phoenix.PubSub, name: VuejsIntegration.PubSub},
       # Start the Finch HTTP client for sending emails
       {Finch, name: VuejsIntegration.Finch},
+      # Run Node in the supervision tree, for server side rendering of vue.js components
+      {NodeJS.Supervisor, [path: LiveVue.SSR.NodeJS.server_path(), pool_size: 4]},
       # Start a worker by calling: VuejsIntegration.Worker.start_link(arg)
       # {VuejsIntegration.Worker, arg},
       # Start to serve requests, typically the last entry

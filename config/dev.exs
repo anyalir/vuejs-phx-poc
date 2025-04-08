@@ -25,8 +25,7 @@ config :vuejs_integration, VuejsIntegrationWeb.Endpoint,
   debug_errors: true,
   secret_key_base: "LJa5M3pZV7wz0ytinm26PDq43+OImEqC7IZEEdNqLEzD2qel+NbEI6a0BaY/xPmn",
   watchers: [
-    esbuild: {Esbuild, :install_and_run, [:vuejs_integration, ~w(--sourcemap=inline --watch)]},
-    tailwind: {Tailwind, :install_and_run, [:vuejs_integration, ~w(--watch)]}
+    npm: ["--silent", "run", "dev", cd: Path.expand("../assets", __DIR__)]
   ]
 
 # ## SSL Support
@@ -55,6 +54,12 @@ config :vuejs_integration, VuejsIntegrationWeb.Endpoint,
 # Watch static and templates for browser reloading.
 config :vuejs_integration, VuejsIntegrationWeb.Endpoint,
   live_reload: [
+    notify: [
+      live_view: [
+        ~r"lib/my_app_web/core_components.ex$",
+        ~r"lib/my_app_web/(live|components)/.*(ex|heex)$"
+      ]
+    ],
     patterns: [
       ~r"priv/static/(?!uploads/).*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
@@ -83,3 +88,9 @@ config :phoenix_live_view,
 
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false
+
+config :live_vue,
+  vite_host: "http://localhost:5173",
+  ssr_module: LiveVue.SSR.ViteJS,
+  # if you want to disable SSR by default, make it false
+  ssr: true

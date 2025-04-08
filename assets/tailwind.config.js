@@ -9,7 +9,8 @@ module.exports = {
   content: [
     "./js/**/*.js",
     "../lib/vuejs_integration_web.ex",
-    "../lib/vuejs_integration_web/**/*.*ex"
+    "../lib/vuejs_integration_web/**/*.*ex",
+    "../lib/vuejs_integration_web/**/*.*vue",
   ],
   theme: {
     extend: {

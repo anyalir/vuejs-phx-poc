@@ -8,11 +8,14 @@
   </:actions>
 </.header>
 
-<.list>
-  <:item title="Completed">{@todo.completed}</:item>
-  <:item title="Title">{@todo.title}</:item>
-  <:item title="Description">{@todo.description}</:item>
-</.list>
+
+<.vue
+  completed={@todo.completed}
+  title={@todo.title}
+  description={@todo.description}
+  v-component="Todo"
+  v-socket={@socket}
+/>
 
 <.back navigate={~p"/todos"}>Back to todos</.back>
 
